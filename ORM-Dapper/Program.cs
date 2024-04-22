@@ -25,7 +25,32 @@ namespace ORM_Dapper
             DapperDepartmentRepository instance = new DapperDepartmentRepository(conn);
             IEnumerable<Department> myDepartments = instance.GetAllDepartments();
 
-            foreach(Department item in myDepartments)
+            var repo = new DapperProductRepository(conn);
+
+            Console.WriteLine("Name of new product?");
+            var productsName = Console.ReadLine();
+            Console.WriteLine("Price of product?");
+            var pricess = double.Parse(Console.ReadLine());
+            Console.WriteLine("CategoryID 1-10");
+            var cateG = int.Parse(Console.ReadLine());
+            
+
+           repo.CreateProduct(productsName,pricess,cateG);
+
+            var myList = repo.GetAllProducts();
+
+            foreach(var item in myList)
+            {
+                
+                Console.WriteLine(item.Name);
+                Console.WriteLine(item.OnSale);
+                Console.WriteLine();
+            }
+
+
+
+
+            foreach (Department item in myDepartments)
             {
                 Console.WriteLine(item.DepartmentID);
                 Console.WriteLine(item.name);
